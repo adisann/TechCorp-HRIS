@@ -1,0 +1,20 @@
+{% extends 'dashboard_base.html' %}
+
+{% block page_name %}
+Announcements
+{% endblock %}
+
+{% block dashboard_content %}
+    <main class="max-w-2xl m-auto space-y-8">
+        <h2>Announcements</h2>
+
+        <section class="space-y-4">
+            {% for a in announcements %}
+                <div class="p-6 bg-white rounded-lg border border-neutral-200 space-y-2">
+                    <h3>{{ a.title }}</h3>
+                    <p class="text-sm text-neutral-500">{{ a.content }}</p>
+                </div>
+            {% endfor %}
+        </section>
+    </main>
+{% endblock %}

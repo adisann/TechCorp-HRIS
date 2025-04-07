@@ -1,0 +1,43 @@
+{% extends 'dashboard_base.html' %}
+
+{% block page_name %}
+    Process Payroll
+{% endblock %}
+
+{% block dashboard_content %}
+    <main class="max-w-xl m-auto space-y-4">
+        <div class="mb-6">
+            <h2 class="text-green-700">Process Payroll</h2>
+            <p class="text-neutral-500 text-sm">Manage employee compensation</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg border border-neutral-200 shadow-sm">
+            <h3 class="mb-3 text-neutral-800">Monthly Payroll Processing</h3>
+            <p class="text-balance text-neutral-600 mb-6">This form is to process payroll to all of Employees and should be processed at the 25th of each month.</p>
+            
+            <form method="post" class="space-y-4">
+                {% csrf_token %}
+                <input name="action" value="process" hidden />
+                
+                <div class="bg-green-50 p-4 rounded-lg border border-green-200 mb-4">
+                    <div class="flex items-start gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24" class="text-green-600 mt-0.5">
+                            <path fill="currentColor" d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10s10-4.486 10-10S17.514 2 12 2m0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8s8 3.589 8 8s-3.589 8-8 8m-1-5h2v2h-2zm0-8h2v6h-2z"/>
+                        </svg>
+                        <div>
+                            <p class="text-sm font-medium text-green-700">Important Note</p>
+                            <p class="text-xs text-green-600">Running this process will calculate payroll for all active employees. Please ensure all data is up-to-date before proceeding.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="flex justify-center items-center gap-2 py-2.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.25em" height="1.25em" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M12 16q-.425 0-.712-.288T11 15V7.85L9.4 9.45q-.275.275-.7.275t-.7-.275q-.275-.275-.275-.7t.275-.7l3-3q.15-.15.325-.213T11.75 5q.2 0 .375.063t.325.212l3 3q.275.275.288.688t-.288.712q-.275.275-.7.275t-.7-.275L13 7.85V15q0 .425-.288.713T12 16m-6 4q-.825 0-1.413-.588T4 18V6q0-.825.588-1.413T6 4h12q.825 0 1.413.588T20 6v12q0 .825-.588 1.413T18 20H6m0-2h12V6H6v12m0 0V6v12"/>
+                    </svg>
+                    Process Payroll
+                </button>
+            </form>
+        </div>
+    </main>
+{% endblock %}

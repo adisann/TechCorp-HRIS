@@ -1,0 +1,78 @@
+{% extends 'dashboard_base.html' %}
+
+{% block page_name %}
+Employee Details
+{% endblock %}
+
+{% block dashboard_content %}
+    <div class="flex items-center justify-between mb-6">
+        <div>
+            <h2 class="text-green-700">Employee Profile</h2>
+            <p class="text-neutral-500 text-sm">Detailed information about {{ employee.full_name }}</p>
+        </div>
+        <a href="{% url 'employee-list' %}" class="bg-white border border-neutral-200 text-neutral-700 py-2 px-4 rounded-lg flex items-center gap-2 hover:bg-neutral-50 transition duration-150 text-sm font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                <path fill="currentColor" d="m10.875 19.3l-6.6-6.6q-.15-.15-.213-.325T4 12q0-.2.063-.375t.212-.325l6.6-6.6q.275-.275.688-.288t.712.288q.3.3.3.7t-.3.7L7.4 11h12.2q.425 0 .713.288T20.6 12q0 .425-.288.713T19.6 13H7.4l4.875 4.9q.275.275.288.688t-.288.712q-.3.3-.7.3t-.7-.3Z"/>
+            </svg>
+            Back to List
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Main Info Card -->
+        <div class="bg-white rounded-lg border border-neutral-200 shadow-sm overflow-hidden md:col-span-2">
+            <div class="p-6 border-b border-neutral-100">
+                <h3 class="text-neutral-800">Personal Information</h3>
+            </div>
+            
+            <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <div class="mb-6">
+                            <p class="text-sm text-neutral-500 mb-1">Full Name</p>
+                            <p class="font-medium">{{ employee.full_name }}</p>
+                        </div>
+                        
+                        <div>
+                            <p class="text-sm text-neutral-500 mb-1">Position</p>
+                            <p class="font-medium">{{ employee.job_title }}</p>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="mb-6">
+                            <p class="text-sm text-neutral-500 mb-1">Start Date</p>
+                            <p class="font-medium">{{ employee.start_date }}</p>
+                        </div>
+                        
+                        <div>
+                            <p class="text-sm text-neutral-500 mb-1">Work Duration</p>
+                            <p class="font-medium">{{ employee.start_date|timesince }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Salary Info Card -->
+        <div class="bg-white rounded-lg border border-neutral-200 shadow-sm overflow-hidden h-fit">
+            <div class="p-6 border-b border-neutral-100">
+                <h3 class="text-neutral-800">Compensation</h3>
+            </div>
+            
+            <div class="p-6">
+                <div class="mb-6">
+                    <p class="text-sm text-neutral-500 mb-1">Monthly Salary</p>
+                    {% load humanize %}
+                    <p class="font-medium text-xl">IDR {{ employee.salary|floatformat:0|intcomma }}</p>
+                </div>
+                
+                <div>
+                    <p class="text-sm text-neutral-500 mb-1">Annual Salary</p>
+                    <p class="font-medium">IDR {{ annual_salary|floatformat:0|intcomma }}</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+{% endblock %}

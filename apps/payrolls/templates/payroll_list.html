@@ -1,0 +1,35 @@
+{% extends 'dashboard_base.html' %}
+
+{% block page_name %}
+    My Payrolls
+{% endblock %}
+
+{% block dashboard_content %}
+    <main class="max-w-3xl m-auto space-y-4">
+        <div class="mb-6">
+            <h2 class="text-green-700">Payment History</h2>
+            <p class="text-neutral-500 text-sm">View all your payroll records</p>
+        </div>
+        
+        {% for p in payrolls %}
+            <div class="bg-white p-6 rounded-lg border border-neutral-200 flex justify-between items-center hover:shadow-md transition duration-200 hover:border-green-200">
+                <div class="space-y-2">
+                    <h3 class="text-neutral-800">Payroll - {{ p.month }}</h3>
+                    {% load humanize %}
+                    <p class="text-sm text-neutral-600">IDR {{ employee.salary|floatformat:0|intcomma }}</p>
+                </div>
+                {% if p.status == 'paid' %}
+                    <div class="bg-emerald-100 text-emerald-700 p-2 px-4 w-fit rounded-full font-medium text-xs">PAID</div>
+                {% elif p.status == 'processing' %}
+                    <div class="bg-amber-100 text-amber-700 p-2 px-4 w-fit rounded-full font-medium text-xs">PROCESSING</div>
+                {% else %}
+                    <div class="bg-rose-100 text-rose-700 p-2 px-4 w-fit rounded-full font-medium text-xs">PENDING</div>
+                {% endif %}
+            </div>
+        {% empty %}
+            <div class="bg-white p-6 rounded-lg border border-neutral-200 text-center">
+                <p class="text-neutral-500">No payroll records found.</p>
+            </div>
+        {% endfor %}
+    </main>
+{% endblock %}

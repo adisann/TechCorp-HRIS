@@ -1,0 +1,41 @@
+{% extends 'dashboard_base.html' %}
+
+{% block page_name %}
+Employees
+{% endblock %}
+
+{% block dashboard_content %}
+    <div class="mb-6">
+        <h2 class="text-green-700">Employee Directory</h2>
+        <p class="text-neutral-500 text-sm">View and manage all company employees</p>
+    </div>
+
+    <div class="bg-white rounded-lg border border-neutral-200 shadow-sm overflow-hidden">
+        <table class="w-full table-fixed">
+            <thead>
+                <tr class="border-b border-neutral-200">
+                    <th class="p-4 text-left text-neutral-600 font-medium">Fullname</th>
+                    <th class="text-left text-neutral-600 font-medium">Position</th>
+                    <th class="text-left text-neutral-600 font-medium">Start Date</th>
+                    <th class="text-left text-neutral-600 font-medium">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+             {% for e in employees %}
+                    <tr class="border-b border-neutral-100 hover:bg-green-50/30 transition duration-150">
+                        <td class="p-4 font-medium">{{ e.full_name }}</td>
+                        <td class="text-neutral-600">{{ e.job_title }}</td>
+                        <td class="text-neutral-600">{{ e.start_date }}</td>
+                        <td>
+                            <a href="{% url 'employee-detail' e.id %}" class="bg-green-600 text-white py-2 px-4 text-sm rounded-lg inline-block hover:bg-green-700 transition duration-150">View Details</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4" class="p-4 text-center text-neutral-500">No employees found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

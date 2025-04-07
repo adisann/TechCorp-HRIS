@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="flex h-screen bg-green-600 justify-center items-center">
+    <div class="w-[340px] space-y-6">
+        <div class="space-y-2">
+            <h3 class="text-white text-center text-2xl font-bold">TechCorp HRIS</h3>
+            <p class="text-neutral-200 text-sm text-center">Sign in to continue</p>
+        </div>
+        <form method="post" class="bg-white p-8 rounded-lg space-y-4">
+            {% csrf_token %}
+            {% if error %}
+                <p class="text-red-500 text-sm text-center">{{ error }}</p>
+            {% endif %}
+            <input 
+                name="username" 
+                placeholder="Username" 
+                required 
+                class="w-full p-2 border border-gray-300 rounded"
+                value="{{ username|default:'' }}"
+            />
+            <input 
+                name="password" 
+                placeholder="Password" 
+                type="password" 
+                required 
+                class="w-full p-2 border border-gray-300 rounded"
+            />
+            <button 
+                type="submit" 
+                class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition"
+            >
+                Login
+            </button>
+        </form>
+    </div>
+</main>
+{% endblock %}
